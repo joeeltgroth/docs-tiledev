@@ -54,55 +54,51 @@ you can retry that step from the Tile Dashboard CI.
 
 Before you use the Tile Dashboard to configure and test your tile, verify the following:
 
-+ You must have a Slack account on the PivotalPartners.slack.com organization.
++ You must have a Broadcom Partner User Account.
     If you don't have an account, contact the technical program management through the [Broadcom Partner Portal](https://partnerportal.broadcom.com/web/partner-portal/home).
 
-+ You belong to your company's Slack channel in the PivotalPartners.slack.com organization.
-
-+ Your tile is uploaded to the [Broadcom Support portal](https://support.broadcom.com/group/ecx/downloads).
-
-    | If you are uploading a&hellip;     | Then&hellip; |
-    |------------------------------------|--------------|
-    | First release      | Contact the technical program management through the [Broadcom Partner Portal](https://partnerportal.broadcom.com/web/partner-portal/home). |
-    | Subsequent release | You can upload pre-releases to the [Broadcom Support portal](https://support.broadcom.com/group/ecx/downloads). |
++ Your tile is uploaded and published to the [Broadcom Support portal](https://support.broadcom.com/group/ecx/downloads) via the [ISV Release Dashboard](https://auth.isv.ci/documentation).
 
 ### <a id="intro"></a> Configuring a tile on the Tile Dashboard
 
 After your tile is uploaded to the Broadcom Support portal, the Tile Dashboard starts to stage and scan it.
-For new tiles, this can take up to an hour.
 
 After the stage and scan tasks, you must configure your tile on the Tile Dashboard.
 The configuration specifies how the tile is installed on the test environment.
 
-Configuring your tile through the Tile Dashboard is equivalent to configuring the tile on Tanzu Operations Manager
-after you download it from the Broadcom Support portal.
+Configuring your tile through the Tile Dashboard is equivalent to configuring the tile on Tanzu Operations Manager.
 
 There are two ways to configure the tile on the Tile Dashboard:
 
 |  Method | Notes and Restrictions | For more information, see&hellip;  |
 | --------| -----------------------| -----------------------------------|
-| Through the **Properties** tab   | This is a form view of the installation properties. | [Configure your Tile using the Properties tab](#config-with-property-tab).       |
-| Through the **Advanced - JSON Properties** tab | This is the list of properties displayed in JSON. | [Configure your Tile using the Advanced - JSON Properties tab](#config-with-advanced-tab).|
+| Through the **Tile Configuration** tab   | This is a form view of the installation properties. | [Configure your Tile using the Tile Configuration tab](#config-with-property-tab).       |
+| Through the **Tile Configuration - Advanced** tab | This is the list of properties displayed in JSON. | [Configure your Tile using the Tile Configuration - Advanced tab](#config-with-advanced-tab).|
 
 ### <a id="navigate-to-tile"></a> Log on to the Tile Dashboard and locate the Configuration page
 
 To log in to the Tile Dashboard and go to the Configuration page:
 
-1. Log on to your PivotalPartners.slack.com account.
+1. Go to the [Tile Dashboard](https://tile-dashboard.isv.ci/). Log on with your Broadcom Partner User Account.
 
-2. Go to the Tile Dashboard URL.
-
-3. Click **Tiles** in the menu bar.
+2. Click **Tiles** in the menu bar.
 
 4. Click the row where your tile is listed.
 
 5. If your tile has more than one version, click the version you want to configure.
 
-6. Click **Configure**.
+6. Click the cell below the "config" column.
 
-### <a id="config-with-property-tab"></a> Configure your tile using the Properties tab
+### <a id="config-with-property-tab"></a> Configure your tile using the Tile Configuration tab
 
-The **Properties** tab view allows you to configure installation properties through a form.
+To configure install properties for your tile using the **Properties** tab:
+
+1. Review or specify the value for each property.
+   If a property is required and is missing valid values, the text box is shown in red.
+
+2. When the *Properties** form is complete and there are no text boxes displayed in red, click **Save** or **Save and Run**.
+
+The **Tile Configuration** tab view allows you to configure installation properties through a form.
 The form pulls properties from your `tile.yml` file parsing the `properties_blueprints`.
 For general information about `properties_blueprints`,
 see [Configuration properties](./reference.html#properties).
@@ -115,24 +111,11 @@ In the form, you can configure:
 * drop-down menus
 * network addresses, ports, secrets, and credentials
 
-To configure other types, for example, nested collections, use the **Advanced - JSON Properties** tab, see [Configure your tile using the Advanced - JSON Properties Tab](#config-with-advanced-tab).
-
 For more information about property types, see [Property and template references](property-template-references.html).
 
-To configure install properties for your tile using the **Properties** tab:
+### <a id="config-with-advanced-tab"></a> Configure your tile using the Tile Configuration - Advanced tab
 
-1. Complete the steps in [Log in to the Tile Dashboard and locate the Configuration page](#navigate-to-tile).
-
-2. Click the **Properties** tab.
-
-3. Review or specify the value for each property.
-   If a property is required and is missing valid values, the text box is shown in red.
-
-4. When the *Properties** form is complete and there are no text boxes displayed in red, click **Save** or **Save and Run**.
-
-### <a id="config-with-advanced-tab"></a> Configure your tile using the advanced - JSON properties tab
-
-In the **Advanced - JSON Properties** tab, you configure install properties, specifying them in JSON,
+In the **Tile Configuration - Advanced** tab, you configure install properties, specifying them in JSON,
 in the format used by the `om` tool.
 
 For more information about the format used by the `om` tool, see:
@@ -140,13 +123,11 @@ For more information about the format used by the `om` tool, see:
 * [om configure-product](https://github.com/pivotal-cf/om/blob/master/docs/configure-product/README.md)
 * [Using the Tanzu Operations Manager CLI](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/<%= vars.dot_major_version %>/vmware-tanzu-ops-manager/install-cli.html).
 
-To configure install properties for your tile using the **Advanced - JSON Properties** tab:
+To configure install properties for your tile using the **Tile Configuration - Advanced** tab:
 
-1. Complete the steps in [Log in to the Tile Dashboard and locate the Configuration page](#navigate-to-tile).
+1. Click the **Tile Configuration - Advanced** tab.
 
-2. Click the **Advanced - JSON Properties** tab.
-
-3. Enter values for all required properties.
+2. Enter values for all required properties.
    If a property is required, you will see the `required` attribute: `"required": true`.
 
    For example:
@@ -159,7 +140,7 @@ To configure install properties for your tile using the **Advanced - JSON Proper
     ...
     ```  
 
-4. After entering values for properties, delete the `required` attribute.
+3. After entering values for properties, delete the `required` attribute.
    This tells Tile Dashboard that this field is now provided.
 
     For example:
@@ -170,7 +151,7 @@ To configure install properties for your tile using the **Advanced - JSON Proper
         "type": "network_address",
     ```
 
-3. Click **Save**.
+4. Click **Save**.
 
 ### <a id="environment-sensitive-values"></a> Environment-sensitive values
 
@@ -182,11 +163,9 @@ Descriptions of these placeholder values appear on the **Tile Configuration** ta
 
 To specify the UAA users:
 
-1. Complete the steps in [Log on to the Tile Dashboard and locate the Configuration page](#navigate-to-tile).
+1. Click the "UAA Users" tab.
 
-1. At the bottom of the configuration page, click **+** to expand and view the text box.
-
-    ![The bottom of the page shows the plus button used to expand the UAA properties form.](img/uaa-properties-collapsed.png)
+1. At the bottom, click **+**.
 
 1. Enter the user name, password, and groups for the UAA user.
 
@@ -194,8 +173,6 @@ To specify the UAA users:
 
 When your configuration is complete, the config icon shows green.
 At this point, you can test the tile on all the environments. Follow these steps:
-
-1. Complete the steps in [Log in to the Tile Dashboard and locate the Configuration page](#navigate-to-tile).
 
 1. Click **Save and Run**.
 
